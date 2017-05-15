@@ -869,12 +869,22 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPlay.area_mc.onRelease = this.delegate(this, this.playRelease);
 		
 		// icone
-		this._playerPlay.icon_mc.beginFill(_buttonColor);
-		this._playerPlay.icon_mc.lineTo(0, 8);
-		this._playerPlay.icon_mc.lineTo(6, 4);
-		this._playerPlay.icon_mc.endFill();
-		this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-		this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		if (!this._bigIcons) {
+			this._playerPlay.icon_mc.beginFill(_buttonColor);
+			this._playerPlay.icon_mc.lineTo(0, 8);
+			this._playerPlay.icon_mc.lineTo(6, 4);
+			this._playerPlay.icon_mc.endFill();
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		} else {
+			this._playerPlay.icon_mc.beginFill(_buttonColor);
+			this._playerPlay.icon_mc.lineTo(0, 8);
+			this._playerPlay.icon_mc.lineTo(6, 4);
+			this._playerPlay.icon_mc.endFill();
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;		
+		}
+
 	}
 	/**
 	 * Initialisation du bouton pause
@@ -887,19 +897,35 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPause.area_mc.onRelease = this.delegate(this, this.pauseRelease); 
 		
 		// icone
-		this._playerPause.icon_mc.beginFill(this._buttonColor); 
-		this._playerPause.icon_mc.lineTo(0, 8); 
-		this._playerPause.icon_mc.lineTo(3, 8); 
-		this._playerPause.icon_mc.lineTo(3, 0); 
-		this._playerPause.icon_mc.endFill(); 
-		this._playerPause.icon_mc.beginFill(this._buttonColor); 
-		this._playerPause.icon_mc.moveTo(5, 0); 
-		this._playerPause.icon_mc.lineTo(5, 8); 
-		this._playerPause.icon_mc.lineTo(8, 8); 
-		this._playerPause.icon_mc.lineTo(8, 0); 
-		this._playerPause.icon_mc.endFill(); 
-		this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
-		this._playerPause.icon_mc._x = BUTTON_WIDTH/2 - _playerPause.icon_mc._width/2;
+		if (!this._bigIcons) {
+			this._playerPause.icon_mc.beginFill(this._buttonColor); 
+			this._playerPause.icon_mc.lineTo(0, 8); 
+			this._playerPause.icon_mc.lineTo(3, 8); 
+			this._playerPause.icon_mc.lineTo(3, 0); 
+			this._playerPause.icon_mc.endFill(); 
+			this._playerPause.icon_mc.beginFill(this._buttonColor); 
+			this._playerPause.icon_mc.moveTo(5, 0); 
+			this._playerPause.icon_mc.lineTo(5, 8); 
+			this._playerPause.icon_mc.lineTo(8, 8); 
+			this._playerPause.icon_mc.lineTo(8, 0); 
+			this._playerPause.icon_mc.endFill(); 
+			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
+			this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;
+		} else {
+			this._playerPause.icon_mc.beginFill(this._buttonColor); 
+			this._playerPause.icon_mc.lineTo(0, 8); 
+			this._playerPause.icon_mc.lineTo(3, 8); 
+			this._playerPause.icon_mc.lineTo(3, 0); 
+			this._playerPause.icon_mc.endFill(); 
+			this._playerPause.icon_mc.beginFill(this._buttonColor); 
+			this._playerPause.icon_mc.moveTo(5, 0); 
+			this._playerPause.icon_mc.lineTo(5, 8); 
+			this._playerPause.icon_mc.lineTo(8, 8); 
+			this._playerPause.icon_mc.lineTo(8, 0); 
+			this._playerPause.icon_mc.endFill(); 
+			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
+			this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;		
+		}
 	}
 	/**
 	 * Initialisation du bouton stop
@@ -915,13 +941,23 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerStop.area_mc.onRelease = this.delegate(this, this.stopRelease); 
 			
 			// icone
-			this._playerStop.icon_mc.beginFill(this._buttonColor); 
-			this._playerStop.icon_mc.lineTo(0, 8);
-			this._playerStop.icon_mc.lineTo(8, 8);
-			this._playerStop.icon_mc.lineTo(8, 0);
-			this._playerStop.icon_mc.endFill(); 
-			this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
-			this._playerStop.icon_mc._x = BUTTON_WIDTH/2 - _playerStop.icon_mc._width/2;
+			if (!this._bigIcons) {
+				this._playerStop.icon_mc.beginFill(this._buttonColor); 
+				this._playerStop.icon_mc.lineTo(0, 8);
+				this._playerStop.icon_mc.lineTo(8, 8);
+				this._playerStop.icon_mc.lineTo(8, 0);
+				this._playerStop.icon_mc.endFill(); 
+				this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
+				this._playerStop.icon_mc._x = BUTTON_WIDTH / 2 - _playerStop.icon_mc._width / 2;
+			} else {
+				this._playerStop.icon_mc.beginFill(this._buttonColor); 
+				this._playerStop.icon_mc.lineTo(0, 8);
+				this._playerStop.icon_mc.lineTo(8, 8);
+				this._playerStop.icon_mc.lineTo(8, 0);
+				this._playerStop.icon_mc.endFill(); 
+				this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
+				this._playerStop.icon_mc._x = BUTTON_WIDTH / 2 - _playerStop.icon_mc._width / 2;
+			}
 		}
 	}
 	/**
@@ -943,6 +979,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerVolume.area_mc.onReleaseOutside = this.delegate(this, this._volumeRelease);
 			
 			// icone fond
+			
 			var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
 			vIconBackground.beginFill(this._buttonColor, 25);
 			vIconBackground.moveTo(0, VOLUME_HEIGHT);
