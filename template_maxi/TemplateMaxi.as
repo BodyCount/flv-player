@@ -869,23 +869,12 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPlay.area_mc.onRelease = this.delegate(this, this.playRelease);
 		
 		// icone
-		if (!this._bigIcons)
-		{		
-			this._playerPlay.icon_mc.beginFill(_buttonColor);
-			this._playerPlay.icon_mc.lineTo(0, 8);
-			this._playerPlay.icon_mc.lineTo(6, 4);
-			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
-		} else {
-			this._playerPlay.icon_mc.beginFill(_buttonColor);
-			this._playerPlay.icon_mc.lineTo(0, 8);
-			this._playerPlay.icon_mc.lineTo(6, 4);
-			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
-		}
-
+		this._playerPlay.icon_mc.beginFill(_buttonColor);
+		this._playerPlay.icon_mc.lineTo(0, 8);
+		this._playerPlay.icon_mc.lineTo(6, 4);
+		this._playerPlay.icon_mc.endFill();
+		this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+		this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
 	}
 	/**
 	 * Initialisation du bouton pause
