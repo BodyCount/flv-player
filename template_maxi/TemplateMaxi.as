@@ -758,6 +758,8 @@ class TemplateMaxi extends TemplateMaxiBase
 	private function _changeIconsSize()
 	{
 		BUTTON_WIDTH = 52;
+		VOLUME_WIDTH = 60;
+		VOLUME_HEIGHT = 12;
 	}
 	
 	/** 
@@ -878,11 +880,12 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
 		} else {
 			this._playerPlay.icon_mc.beginFill(_buttonColor);
-			this._playerPlay.icon_mc.lineTo(0, 8);
-			this._playerPlay.icon_mc.lineTo(6, 4);
+			this._playerPlay.icon_mc.lineTo(0, 16);
+			this._playerPlay.icon_mc.lineTo(12, 8);
 			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;		
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/1.3;
+			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		
 		}
 
 	}
@@ -913,18 +916,19 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;
 		} else {
 			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.lineTo(0, 8); 
-			this._playerPause.icon_mc.lineTo(3, 8); 
-			this._playerPause.icon_mc.lineTo(3, 0); 
+			this._playerPause.icon_mc.lineTo(0, 16); 
+			this._playerPause.icon_mc.lineTo(6, 16); 
+			this._playerPause.icon_mc.lineTo(6, 0); 
 			this._playerPause.icon_mc.endFill(); 
 			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.moveTo(5, 0); 
-			this._playerPause.icon_mc.lineTo(5, 8); 
-			this._playerPause.icon_mc.lineTo(8, 8); 
-			this._playerPause.icon_mc.lineTo(8, 0); 
+			this._playerPause.icon_mc.moveTo(10, 0); 
+			this._playerPause.icon_mc.lineTo(10, 16); 
+			this._playerPause.icon_mc.lineTo(16, 16); 
+			this._playerPause.icon_mc.lineTo(16, 0); 
 			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
-			this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;		
+			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/1.3;
+			this._playerPause.icon_mc._x = BUTTON_WIDTH/2 - _playerPause.icon_mc._width/2;
+		
 		}
 	}
 	/**
@@ -1135,20 +1139,20 @@ class TemplateMaxi extends TemplateMaxiBase
 				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
 			} else {
 				this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.lineTo(0, 12);
-				this._playerFullscreen.icon_mc.lineTo(12, 12);
-				this._playerFullscreen.icon_mc.lineTo(12, 0);
+				this._playerFullscreen.icon_mc.lineTo(0, 24);
+				this._playerFullscreen.icon_mc.lineTo(24, 24);
+				this._playerFullscreen.icon_mc.lineTo(24, 0);
 				this._playerFullscreen.icon_mc.lineTo(0, 0);
 				
 				this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.moveTo(6, 4);
-				this._playerFullscreen.icon_mc.lineTo(9, 4);
-				this._playerFullscreen.icon_mc.lineTo(9, 7);
-				this._playerFullscreen.icon_mc.moveTo(9, 4);
-				this._playerFullscreen.icon_mc.lineTo(4, 9);
+				this._playerFullscreen.icon_mc.moveTo(12, 8);
+				this._playerFullscreen.icon_mc.lineTo(18, 8);
+				this._playerFullscreen.icon_mc.lineTo(18, 14);
+				this._playerFullscreen.icon_mc.moveTo(18, 8);
+				this._playerFullscreen.icon_mc.lineTo(8, 18);
 				
-				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
-				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
+				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.3 + 1;
+				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH/2 - this._playerFullscreen.icon_mc._width/2 + 1;
 			}
 		}
 	}
