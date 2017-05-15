@@ -33,15 +33,14 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function TemplateMaxi()
 	{
-		super();
 		
+		super();
 		
 		this._initBackground();
 		this._initFont();
 		this._initTitle();
 		this._initSubtitles();
 		
-
 		this._marginSlider = BUTTON_WIDTH;
 		var vSeparators:Array = [BUTTON_WIDTH]; // Premier séparateur pour le bouton Play
 		if (this._showStop) {
@@ -60,6 +59,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._marginSlider += BUTTON_WIDTH;
 			vSeparators.push(BUTTON_WIDTH);
 		}
+
 		this._initPlayerTime();
 		if (this._showTime > 0) {
 			this._marginSlider += this._playerTime._width + 10;
@@ -160,6 +160,8 @@ class TemplateMaxi extends TemplateMaxiBase
 	
 	/*=========================== METHODES PRIVEES ===========================*/
 	/*========================================================================*/
+	
+	
 	/**
 	 * Initialisation du gestionnaire de clavier
 	 */
@@ -427,7 +429,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._initBuffering();
 	}
 	/**
-	 * The user click on the video	 */
+	 * The user click on the video
+	 */
 	private function _videoOnClick()
 	{
 		// Reset onclick interval
@@ -450,7 +453,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		}
 	}
 	/**
-	 * The user double click on the video	 */
+	 * The user double click on the video
+	 */
 	private function _videoOnDoubleClick()
 	{
 		// Actions
@@ -472,7 +476,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		}
 	}
 	/**
-	 * Initialisation de la police	 */
+	 * Initialisation de la police
+	 */
 	private function _initFont()
 	{
 		var vFontList:Array = TextField.getFontList();
@@ -643,7 +648,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		}
 	}
 	/**
-	 * Initialisation de l'image de départ	 */
+	 * Initialisation de l'image de départ
+	 */
 	private function _initStartImage()
 	{
 		if(this._startImage != undefined){
@@ -695,6 +701,11 @@ class TemplateMaxi extends TemplateMaxiBase
 		if (this._player) {
 			this._player.removeMovieClip();
 		}
+		
+		if (this._bigIcons) {
+			this._changeIconsSize();
+		}
+		
 		super._initPlayer();
 		
 		if (this._showMouse == "never") {
@@ -743,6 +754,12 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._player._visible = false;
 		}
 	}
+	
+	private function _changeIconsSize()
+	{
+		BUTTON_WIDTH = 52;
+	}
+	
 	/** 
 	 * Affichage du lecteur lorsque la souris est sur la video
 	 */ 
@@ -852,12 +869,23 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPlay.area_mc.onRelease = this.delegate(this, this.playRelease);
 		
 		// icone
-		this._playerPlay.icon_mc.beginFill(_buttonColor);
-		this._playerPlay.icon_mc.lineTo(0, 8);
-		this._playerPlay.icon_mc.lineTo(6, 4);
-		this._playerPlay.icon_mc.endFill();
-		this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-		this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		if (!this._bigIcons)
+		{		
+			this._playerPlay.icon_mc.beginFill(_buttonColor);
+			this._playerPlay.icon_mc.lineTo(0, 8);
+			this._playerPlay.icon_mc.lineTo(6, 4);
+			this._playerPlay.icon_mc.endFill();
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		} else {
+			this._playerPlay.icon_mc.beginFill(_buttonColor);
+			this._playerPlay.icon_mc.lineTo(0, 8);
+			this._playerPlay.icon_mc.lineTo(6, 4);
+			this._playerPlay.icon_mc.endFill();
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
+		}
+
 	}
 	/**
 	 * Initialisation du bouton pause
@@ -1347,7 +1375,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		}
 	}
 	/**
-	 * Exécuté lorsque le mode plein écran est activé	 */
+	 * Exécuté lorsque le mode plein écran est activé
+	 */
 	private function _onStageFullscreen()
 	{
 		this._isFullscreen = true;
@@ -1386,7 +1415,8 @@ class TemplateMaxi extends TemplateMaxiBase
 		resizeVideo();
 	}
 	/**
-	 * Exécuté lorsque le mode plein écran est désactivé	 */
+	 * Exécuté lorsque le mode plein écran est désactivé
+	 */
 	private function _onStageNormal()
 	{
 		this._isFullscreen = false;
@@ -1518,20 +1548,23 @@ class TemplateMaxi extends TemplateMaxiBase
 		
 	}
 	/**
-	 * Action sur le bouton Fullscreen	 */
+	 * Action sur le bouton Fullscreen
+	 */
 	public function fullscreenRelease()
 	{
 		Stage["displayState"] = (!this._isFullscreen)?"fullscreen":"normal";
 	}
 	/**
-	 * Action sur le bouton ShowSubtitles	 */
+	 * Action sur le bouton ShowSubtitles
+	 */
 	public function showSubtitlesRelease()
 	{
 		this._subtitles.hide = (this._subtitles.hide)?false:true;
 		this._subtitles._visible = this._subtitles.hide;
 	}
 	/**
-	 * Action sur le bouton HideSubtitles	 */
+	 * Action sur le bouton HideSubtitles
+	 */
 	public function hideSubtitlesRelease()
 	{
 		

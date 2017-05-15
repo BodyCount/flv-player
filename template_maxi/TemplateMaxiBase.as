@@ -353,6 +353,8 @@ class TemplateMaxiBase extends ATemplate
 	 */
 	private var _iconPlayBackgroundAlpha:Number = 75;
 	
+	private var _bigIcons:Boolean = false;
+	
 	
 	/**
 	 * Constructor
@@ -448,6 +450,7 @@ class TemplateMaxiBase extends ATemplate
 		this._setVar("_iconPlayColor", 			[_root.iconplaycolor, pConfig.iconplaycolor], 	"Color");
 		this._setVar("_iconPlayBackgroundColor", [_root.iconplaybgcolor, pConfig.iconplaybgcolor], 	"Color");
 		this._setVar("_iconPlayBackgroundAlpha", [_root.iconplaybgalpha, pConfig.iconplaybgalpha], 	"Number");
+		this._setVar("_bigIcons", [_root.bigicons, pConfig.bigicons], 	"Boolean");
 		
 		// Initialize top containers
 		for (var i:String in _root) {
