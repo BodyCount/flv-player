@@ -1,3 +1,1 @@
-..\swfmill\swfmill simple ..\base\player.xml player_flv_maxi.swf
-..\mtasc\mtasc -version 8 -keep -v -main -cp ..\classes -swf player_flv_maxi.swf TemplateMaxi.as
-pause
+D:\mtasc\mtasc.exe -version 8 -keep -v -main -cp D:\flv-player\classes -swf "C:\Users\ephomin\AppData\Roaming\Interactive Data\eSignal\WebPlugins\esignalmedia\js\plugins\player_flv_maxi.swf" D:\flv-player\template_maxi\TemplateMaxi.as
