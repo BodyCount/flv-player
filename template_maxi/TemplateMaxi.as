@@ -1117,21 +1117,39 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerFullscreen.area_mc.onRelease = this.delegate(this, this.fullscreenRelease); 
 			
 			// icone
-			this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
-			this._playerFullscreen.icon_mc.lineTo(0, 12);
-			this._playerFullscreen.icon_mc.lineTo(12, 12);
-			this._playerFullscreen.icon_mc.lineTo(12, 0);
-			this._playerFullscreen.icon_mc.lineTo(0, 0);
-			
-			this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
-			this._playerFullscreen.icon_mc.moveTo(6, 4);
-			this._playerFullscreen.icon_mc.lineTo(9, 4);
-			this._playerFullscreen.icon_mc.lineTo(9, 7);
-			this._playerFullscreen.icon_mc.moveTo(9, 4);
-			this._playerFullscreen.icon_mc.lineTo(4, 9);
-			
-			this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
-			this._playerFullscreen.icon_mc._x = BUTTON_WIDTH/2 - this._playerFullscreen.icon_mc._width/2 + 1;
+			if (!this._bigIcons) {
+				this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
+				this._playerFullscreen.icon_mc.lineTo(0, 12);
+				this._playerFullscreen.icon_mc.lineTo(12, 12);
+				this._playerFullscreen.icon_mc.lineTo(12, 0);
+				this._playerFullscreen.icon_mc.lineTo(0, 0);
+				
+				this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
+				this._playerFullscreen.icon_mc.moveTo(6, 4);
+				this._playerFullscreen.icon_mc.lineTo(9, 4);
+				this._playerFullscreen.icon_mc.lineTo(9, 7);
+				this._playerFullscreen.icon_mc.moveTo(9, 4);
+				this._playerFullscreen.icon_mc.lineTo(4, 9);
+				
+				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
+				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
+			} else {
+				this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
+				this._playerFullscreen.icon_mc.lineTo(0, 12);
+				this._playerFullscreen.icon_mc.lineTo(12, 12);
+				this._playerFullscreen.icon_mc.lineTo(12, 0);
+				this._playerFullscreen.icon_mc.lineTo(0, 0);
+				
+				this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
+				this._playerFullscreen.icon_mc.moveTo(6, 4);
+				this._playerFullscreen.icon_mc.lineTo(9, 4);
+				this._playerFullscreen.icon_mc.lineTo(9, 7);
+				this._playerFullscreen.icon_mc.moveTo(9, 4);
+				this._playerFullscreen.icon_mc.lineTo(4, 9);
+				
+				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
+				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
+			}
 		}
 	}
 	/**
