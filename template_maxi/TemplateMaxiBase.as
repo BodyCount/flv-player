@@ -361,6 +361,7 @@ class TemplateMaxiBase extends ATemplate
 	 */
 	public function TemplateMaxiBase()
 	{
+
 		this._topContainers = new Array();
 		super();
 	}

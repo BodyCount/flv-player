@@ -760,6 +760,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		BUTTON_WIDTH = 52;
 		VOLUME_WIDTH = 60;
 		VOLUME_HEIGHT = 12;
+		PLAYER_HEIGHT = 30;
 	}
 	
 	/** 
@@ -798,20 +799,39 @@ class TemplateMaxi extends TemplateMaxiBase
 	{
 		this._playerSeparators = this._player.createEmptyMovieClip("separators_mc", this._player.getNextHighestDepth()); 
 		
+
 		var vTotal:Number = 0;
-		for (var i:Number=0; i<=pList.length; i++) {
-			vTotal += pList[i];
-			this._playerSeparators.beginFill(0xcccccc, 50);
-			this._playerSeparators.moveTo(vTotal, 2);
-			this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 2);
-			this._playerSeparators.lineTo(vTotal + 1, PLAYER_HEIGHT - 2);
-			this._playerSeparators.lineTo(vTotal + 1, 2);
-			this._playerSeparators.endFill();
-			this._playerSeparators.beginFill(0x666666, 50);
-			this._playerSeparators.lineTo(vTotal - 1, 2);
-			this._playerSeparators.lineTo(vTotal - 1, PLAYER_HEIGHT - 2);
-			this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 2);
-			this._playerSeparators.endFill();
+		if (!this._bigIcons) {
+			for (var i:Number=0; i<=pList.length; i++) {
+				vTotal += pList[i];
+				this._playerSeparators.beginFill(0xcccccc, 50);
+				this._playerSeparators.moveTo(vTotal, 2);
+				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 2);
+				this._playerSeparators.lineTo(vTotal + 1, PLAYER_HEIGHT - 2);
+				this._playerSeparators.lineTo(vTotal + 1, 2);
+				this._playerSeparators.endFill();
+				this._playerSeparators.beginFill(0x666666, 50);
+				this._playerSeparators.lineTo(vTotal - 1, 2);
+				this._playerSeparators.lineTo(vTotal - 1, PLAYER_HEIGHT - 2);
+				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 2);
+				this._playerSeparators.endFill();
+			}
+		} else {
+			for (var i:Number=0; i<=pList.length; i++) {
+				vTotal += pList[i];
+				
+				this._playerSeparators.beginFill(0xcccccc, 50);
+				this._playerSeparators.moveTo(vTotal, 2);
+				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 4);
+				this._playerSeparators.lineTo(vTotal + 1, PLAYER_HEIGHT - 4);
+				this._playerSeparators.lineTo(vTotal + 1, 2);
+				this._playerSeparators.endFill();
+				this._playerSeparators.beginFill(0x666666, 50);
+				this._playerSeparators.lineTo(vTotal - 1, 2);
+				this._playerSeparators.lineTo(vTotal - 1, PLAYER_HEIGHT - 4);
+				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 4);
+				this._playerSeparators.endFill();		
+			}
 		}
 	}
 	/**
@@ -883,7 +903,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerPlay.icon_mc.lineTo(0, 16);
 			this._playerPlay.icon_mc.lineTo(12, 8);
 			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/1.3;
+			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/1.7;
 			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
 		
 		}
@@ -926,7 +946,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerPause.icon_mc.lineTo(16, 16); 
 			this._playerPause.icon_mc.lineTo(16, 0); 
 			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/1.3;
+			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/1.7;
 			this._playerPause.icon_mc._x = BUTTON_WIDTH/2 - _playerPause.icon_mc._width/2;
 		
 		}
@@ -983,15 +1003,26 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerVolume.area_mc.onReleaseOutside = this.delegate(this, this._volumeRelease);
 			
 			// icone fond
+			if (!this._bigIcons) {
+				var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
+				vIconBackground.beginFill(this._buttonColor, 25);
+				vIconBackground.moveTo(0, VOLUME_HEIGHT);
+				vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
+				vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
+				vIconBackground.endFill();
+				vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height/2;
+				vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
+			} else {
+				var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
+				vIconBackground.beginFill(this._buttonColor, 25);
+				vIconBackground.moveTo(0, VOLUME_HEIGHT);
+				vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
+				vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
+				vIconBackground.endFill();
+				vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height/1.7;
+				vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
 			
-			var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
-			vIconBackground.beginFill(this._buttonColor, 25);
-			vIconBackground.moveTo(0, VOLUME_HEIGHT);
-			vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
-			vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
-			vIconBackground.endFill();
-			vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height/2;
-			vIconBackground._x = VOLUME_WIDTH/2 - vIconBackground._width/2;
+			}
 			
 			// icone
 			this._updateVolume();
@@ -1016,14 +1047,23 @@ class TemplateMaxi extends TemplateMaxiBase
 		
 		var vWidth:Number = (VOLUME_WIDTH - 8) * this._volume / this._volumeMax;
 		var vRatio:Number = this._volume / this._volumeMax;
-		
-		vIcon.beginFill(this._buttonColor);
-		vIcon.moveTo(0, VOLUME_HEIGHT);
-		vIcon.lineTo(vWidth, VOLUME_HEIGHT);
-		vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
-		vIcon.endFill();
-		vIcon._y = vIcon._parent.background_mc._y;
-		vIcon._x = vIcon._parent.background_mc._x;
+		if (!this._bigIcons) {
+			vIcon.beginFill(this._buttonColor);
+			vIcon.moveTo(0, VOLUME_HEIGHT);
+			vIcon.lineTo(vWidth, VOLUME_HEIGHT);
+			vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
+			vIcon.endFill();
+			vIcon._y = vIcon._parent.background_mc._y;
+			vIcon._x = vIcon._parent.background_mc._x;
+		} else {
+			vIcon.beginFill(this._buttonColor);
+			vIcon.moveTo(0, VOLUME_HEIGHT);
+			vIcon.lineTo(vWidth, VOLUME_HEIGHT);
+			vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
+			vIcon.endFill();
+			vIcon._y = vIcon._parent.background_mc._y;
+			vIcon._x = vIcon._parent.background_mc._x;
+		}
 	}
 	/**
 	 * Le enterFrame pendant l'appui du bouton Volume
@@ -1151,7 +1191,7 @@ class TemplateMaxi extends TemplateMaxiBase
 				this._playerFullscreen.icon_mc.moveTo(18, 8);
 				this._playerFullscreen.icon_mc.lineTo(8, 18);
 				
-				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.3 + 1;
+				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.7 + 1;
 				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH/2 - this._playerFullscreen.icon_mc._width/2 + 1;
 			}
 		}
@@ -1262,6 +1302,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		vBarButton.tabEnabled = false;
 		vBarButton.onRelease = this.delegate(this, function()
 		{
+			/*
 			var vPosition:Number = this._playerSlider._xmouse;
 			if (vPosition < 0) {
 				vPosition = 0;
@@ -1274,9 +1315,11 @@ class TemplateMaxi extends TemplateMaxiBase
 			
 			var vPositionTime:Number = this._playerSlider.bar_mc._x / (this._playerSlider.width - this.SLIDER_WIDTH) * this.controller.getDuration(); 
 			this.controller.setPosition(vPositionTime);
+			*/
 		});
 		
 		// bar
+		
 		var vBarBg:MovieClip = this._playerSlider.createEmptyMovieClip("barBg_mc", this._playerSlider.getNextHighestDepth()); 
 		vBarBg.beginFill(0xcccccc, 25);
 		vBarBg.lineTo(this._playerSlider.width, 0);
@@ -1292,6 +1335,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		vBarBg._y = PLAYER_HEIGHT / 2;
 		
 		// loading bar
+		/*
 		this._loadingBar = this._playerSlider.createEmptyMovieClip("loading_mc", this._playerSlider.getNextHighestDepth());
 		this._loadingBar.beginFill(_loadingColor, 75);
 		this._loadingBar.lineTo(_playerSlider.width, 0);
@@ -1343,7 +1387,9 @@ class TemplateMaxi extends TemplateMaxiBase
 		vSlider.endFill();
 		vSlider._y = PLAYER_HEIGHT/2 - SLIDER_HEIGHT / 2;
 		
+		
 		vSlider.onEnterFrame = this.delegate(this, this._sliderEnterFrame);
+		*/
 	}
 	/** 
 	 * Le enterFrame du slider 
