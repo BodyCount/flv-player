@@ -103,17 +103,17 @@ class TemplateMaxi extends TemplateMaxiBase
 	}
 	
 	public function _debug(txt: String){
-		/*
-		if (ExternalInterface.available) {
-			this._title = txt;
-			this._initTitle();
-			//ExternalInterface.call("function(){window.location.href = 'http://flite.com';}")
-			getURL('javascript:console.log("' + txt + '");');
-		} else {
-			this._title = 'rip';
-			this._initTitle();
+		if (this._enableDebug){
+			if (ExternalInterface.available) {
+				this._title = txt;
+				this._initTitle();
+				//ExternalInterface.call("function(){window.location.href = 'http://flite.com';}")
+				getURL('javascript:console.log("' + txt + '");');
+			} else {
+				this._title = 'rip';
+				this._initTitle();
+			}
 		}
-		*/
 	}
 	/**
 	 * Lancé par mtasc
@@ -442,7 +442,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _videoOnClick()
 	{
-		//this._debug("clickvideo");
+		this._debug("clickvideo");
 		// Reset onclick interval
 		clearInterval(this._onClickInterval);
 		this._onClickInterval = -1;
@@ -1565,7 +1565,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function resizeVideo(pWidth:Number, pHeight:Number)
 	{
-		//this._debug("video resize");
+		this._debug("video resize");
 		// On redimensinone la vidéo à la taille du flash en gardant les proportions
 		var originWidth:Number = (pWidth !== undefined)?pWidth:this.video.video.width;
 		var originHeight:Number = (pHeight !== undefined)?pHeight:this.video.video.height;
@@ -1748,7 +1748,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	/*========================================================================*/
 	public function set jsPlay(n:String)
 	{
-		//this._debug('play')
+		this._debug('play')
 		if (!this.controller.isPlaying) {
 			this.playRelease();
 		}
