@@ -35,11 +35,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	 * Initialisation
 	 */
 	
-	 function recieveFromJS(msg) {
-
-			_root.txtRecieve.text = msg;
-
-	}
 	public function TemplateMaxi()
 	{
 		
