@@ -22,6 +22,9 @@ The Initial Developer of the Original Code is neolao (neolao@gmail.com).
  * @version 	1.6.0 (26/02/2008)
  * @license		http://creativecommons.org/licenses/by-sa/3.0/deed.fr
  */ 
+
+import flash.external.ExternalInterface;
+
 class TemplateMaxi extends TemplateMaxiBase
 {
 	
@@ -31,6 +34,12 @@ class TemplateMaxi extends TemplateMaxiBase
 	/**
 	 * Initialisation
 	 */
+	
+	 function recieveFromJS(msg) {
+
+			_root.txtRecieve.text = msg;
+
+	}
 	public function TemplateMaxi()
 	{
 		
@@ -96,6 +105,20 @@ class TemplateMaxi extends TemplateMaxiBase
 			}
 		});
 		Stage.addListener(stageListener);
+	}
+	
+	public function _debug(txt: String){
+		/*
+		if (ExternalInterface.available) {
+			this._title = txt;
+			this._initTitle();
+			//ExternalInterface.call("function(){window.location.href = 'http://flite.com';}")
+			getURL('javascript:console.log("' + txt + '");');
+		} else {
+			this._title = 'rip';
+			this._initTitle();
+		}
+		*/
 	}
 	/**
 	 * Lancé par mtasc
@@ -286,16 +309,7 @@ class TemplateMaxi extends TemplateMaxiBase
 				this.fullscreenRelease();
 			}));
 		}
-		
-		/*// Debug : to know what is the key code
-		var o:Object = new Object();
-		o.onKeyUp = this.delegate(this, function() 
-		{
-			this.video.title_txt.text = Key.getCode();
-		});
-		Key.addListener(o);
-		//*/
-		
+			
 	}
 	/**
 	 * Initialisation du buffering
@@ -433,6 +447,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _videoOnClick()
 	{
+		//this._debug("clickvideo");
 		// Reset onclick interval
 		clearInterval(this._onClickInterval);
 		this._onClickInterval = -1;
@@ -747,6 +762,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._mouse.onMouseMove = this.delegate(this, internalShow);
 			
 			// Key listener
+			
 			var o:Object = new Object();
 			o.onKeyDown = this.delegate(this, internalShow);
 			Key.addListener(o);
@@ -755,6 +771,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		}
 	}
 	
+
 	private function _changeIconsSize()
 	{
 		BUTTON_WIDTH = 52;
@@ -1191,7 +1208,7 @@ class TemplateMaxi extends TemplateMaxiBase
 				this._playerFullscreen.icon_mc.moveTo(18, 8);
 				this._playerFullscreen.icon_mc.lineTo(8, 18);
 				
-				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.7 + 1;
+				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.8;
 				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH/2 - this._playerFullscreen.icon_mc._width/2 + 1;
 			}
 		}
@@ -1553,6 +1570,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function resizeVideo(pWidth:Number, pHeight:Number)
 	{
+		//this._debug("video resize");
 		// On redimensinone la vidéo à la taille du flash en gardant les proportions
 		var originWidth:Number = (pWidth !== undefined)?pWidth:this.video.video.width;
 		var originHeight:Number = (pHeight !== undefined)?pHeight:this.video.video.height;
@@ -1735,6 +1753,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	/*========================================================================*/
 	public function set jsPlay(n:String)
 	{
+		//this._debug('play')
 		if (!this.controller.isPlaying) {
 			this.playRelease();
 		}

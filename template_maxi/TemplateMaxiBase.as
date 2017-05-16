@@ -466,4 +466,5 @@ class TemplateMaxiBase extends ATemplate
 			}
 		}
 	}
+	
 }
