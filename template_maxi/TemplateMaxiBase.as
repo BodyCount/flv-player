@@ -304,7 +304,7 @@ class TemplateMaxiBase extends ATemplate
 	/**
 	 * La couleur du titre de la vidéo
 	 */
-	private var _titleColor:Number = 0xffffff;
+	private var _titleColor:Number = 0xFF0000;
 	/**
 	 * La dernière valeur du buffer
 	 */
@@ -354,6 +354,8 @@ class TemplateMaxiBase extends ATemplate
 	private var _iconPlayBackgroundAlpha:Number = 75;
 	
 	private var _bigIcons:Boolean = false;
+	
+	private var _enableSeparators:Boolean = true;
 	
 	private var _enableDebug:Boolean = false;
 	
@@ -454,6 +456,7 @@ class TemplateMaxiBase extends ATemplate
 		this._setVar("_iconPlayBackgroundColor", [_root.iconplaybgcolor, pConfig.iconplaybgcolor], 	"Color");
 		this._setVar("_iconPlayBackgroundAlpha", [_root.iconplaybgalpha, pConfig.iconplaybgalpha], 	"Number");
 		this._setVar("_bigIcons", [_root.bigicons, pConfig.bigicons], 	"Boolean");
+		this._setVar("_enableSeparators", [_root.enableseparators, pConfig.enableseparators], 	"Boolean");
 		this._setVar("_enableDebug", [_root.enabledebug, pConfig.enabledebug], 	"Boolean");
 		// Initialize top containers
 		for (var i:String in _root) {

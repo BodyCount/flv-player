@@ -70,8 +70,11 @@ class TemplateMaxi extends TemplateMaxiBase
 			vSeparators.push(this._playerTime._width + 10);
 		}
 		this._initPlayerSlider(this._marginSlider);
-		this._createSeparators(vSeparators);
 		
+		if (this._enableSeparators){
+			this._createSeparators(vSeparators);
+		}
+
 		// Initialisation des événements du Fullscreen
 		var fullscreenListener:Object = new Object();
 		fullscreenListener.onFullScreen = this.delegate(this, function(pFull:Boolean)
