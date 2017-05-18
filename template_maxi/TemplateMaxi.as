@@ -76,11 +76,14 @@ class TemplateMaxi extends TemplateMaxiBase
 		var fullscreenListener:Object = new Object();
 		fullscreenListener.onFullScreen = this.delegate(this, function(pFull:Boolean)
 		{	
-			if (!this._isFullscreen) {
+			//this._debug('on full screen: ' + Stage["displayState"])
+			//this._isFullscreen = !this._isFullscreen;
+			if (Stage["displayState"] === 'fullScreen') {
 				this._onStageFullscreen();
 			} else {
 				this._onStageNormal();
 			}
+			
 		});
 		Stage.addListener(fullscreenListener);
 		
@@ -95,6 +98,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		// Auto resize
 		var stageListener:Object = new Object();
 		stageListener.onResize = this.delegate(this, function () {
+			//this._debug('onResize: ' + this._isFullscreen)
 			if (!this._isFullscreen) {
 				this._onStageNormal();
 			}
@@ -1526,7 +1530,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _onStageNormal()
 	{
-		this._debug('onstagenormal');
+		this._debug('onStageNormal');
 		this._isFullscreen = false;
 		
 		//this._player._x = this._stageNormalParams.player_x;
@@ -1661,7 +1665,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function fullscreenRelease()
 	{
-		this._debug(this._isFullscreen);
+		//this._debug('fullscreenRelease: ' + this._isFullscreen);
 		Stage["displayState"] = (!this._isFullscreen)?"fullscreen":"normal";
 	}
 	/**
