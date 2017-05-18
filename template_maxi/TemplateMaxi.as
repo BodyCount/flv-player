@@ -106,13 +106,11 @@ class TemplateMaxi extends TemplateMaxiBase
 		Stage.addListener(stageListener);
 	}
 	
-	public function _debug(txt){
+	public function _debug(message){
 		if (this._enableDebug){
-			txt = string(txt)
-			var req:LoadVars = new LoadVars();
-			req.text = txt;
-			req.send("http://localhost:3000/debugg", "myWindow","GET");
-			this._title = txt;
+			message = string(message)
+			super.debug(message)
+			this._title = message;
 			this._initTitle();
 		}
 		
