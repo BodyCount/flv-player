@@ -30,10 +30,12 @@ class ATemplate
 	
 	// ------------------------------ VARIABLES --------------------------------
 	/**
-	 * La largeur du Flash	 */
+	 * La largeur du Flash
+	 */
 	private var _swfWidth:Number;
 	/**
-	 * La haueur du Flash	 */
+	 * La haueur du Flash
+	 */
 	private var _swfHeight:Number;
 	/**
 	 * Les raccourcis clavier
@@ -42,19 +44,23 @@ class ATemplate
 	
 	/**
 	 * L'instance du fond
-	 */	private var _background:MovieClip = _root.background_mc;
+	 */
+	private var _background:MovieClip = _root.background_mc;
 	/**
-	 * L'instance du clip contenant l'objet Video	 */
+	 * L'instance du clip contenant l'objet Video
+	 */
 	public var video:MovieClip = _root.video_mc;
 	/**
-	 * L'instance du lecteur	 */
+	 * L'instance du lecteur
+	 */
 	private var _player:MovieClip;
 	/**
 	 * L'instance du controleur de la vidéo
 	 */
 	public var controller:PlayerBasic;
 	/**
-	 * 	 */
+	 * 
+	 */
 	private var _lastFocus:String;
 	
 	
@@ -161,7 +167,8 @@ class ATemplate
 		this._shortcuts[pKeyCode] = pFunction;
 	}
 	/**
-	 * Initialisation de la vidéo	 */
+	 * Initialisation de la vidéo
+	 */
 	private function _initVideo()
 	{
 		// Fond noir de la taille de la vidéo
@@ -216,7 +223,8 @@ class ATemplate
 	 * Redimensionne la video
 	 * 
 	 * @param pWidth (optional) La largeur de la vidéo
-	 * @param pHeight (optional) La hauteur de la vidéo	 */
+	 * @param pHeight (optional) La hauteur de la vidéo
+	 */
 	public function resizeVideo(pWidth:Number, pHeight:Number)
 	{
 		// On redimensinone la vidéo à la taille du flash en gardant les proportions
@@ -266,6 +274,11 @@ class ATemplate
 	public function startLoading()
 	{
 		
+	}
+	
+	public function debug(message)
+	{
+		this.controller.debug(message);
 	}
 	/*==================== FIN = METHODES PUBLIQUES = FIN ====================*/
 	/*========================================================================*/
