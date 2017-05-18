@@ -23,8 +23,6 @@ The Initial Developer of the Original Code is neolao (neolao@gmail.com).
  * @license		http://creativecommons.org/licenses/by-sa/3.0/deed.fr
  */ 
 
-import flash.external.ExternalInterface;
-
 class TemplateMaxi extends TemplateMaxiBase
 {
 	
@@ -39,12 +37,10 @@ class TemplateMaxi extends TemplateMaxiBase
 	{
 		
 		super();
-		
 		this._initBackground();
 		this._initFont();
 		this._initTitle();
 		this._initSubtitles();
-		
 		this._marginSlider = BUTTON_WIDTH;
 		var vSeparators:Array = [BUTTON_WIDTH]; // Premier séparateur pour le bouton Play
 		if (this._showStop) {
@@ -75,10 +71,11 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._createSeparators(vSeparators);
 		}
 
+		
 		// Initialisation des événements du Fullscreen
 		var fullscreenListener:Object = new Object();
 		fullscreenListener.onFullScreen = this.delegate(this, function(pFull:Boolean)
-		{
+		{	
 			if (!this._isFullscreen) {
 				this._onStageFullscreen();
 			} else {
@@ -105,19 +102,18 @@ class TemplateMaxi extends TemplateMaxiBase
 		Stage.addListener(stageListener);
 	}
 	
-	public function _debug(txt: String){
+	public function _debug(txt){
 		if (this._enableDebug){
-			if (ExternalInterface.available) {
-				this._title = txt;
-				this._initTitle();
-				//ExternalInterface.call("function(){window.location.href = 'http://flite.com';}")
-				getURL('javascript:console.log("' + txt + '");');
-			} else {
-				this._title = 'rip';
-				this._initTitle();
-			}
+			txt = string(txt)
+			var req:LoadVars = new LoadVars();
+			req.text = txt;
+			req.send("http://localhost:3000/debugg", "myWindow","GET");
+			this._title = txt;
+			this._initTitle();
 		}
+		
 	}
+	
 	/**
 	 * Lancé par mtasc
 	 */
@@ -471,6 +467,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	private function _videoOnDoubleClick()
 	{
 		// Actions
+		this._debug(this._onDoubleClick);
 		switch (this._onDoubleClick) {
 			case "fullscreen":
 				this.fullscreenRelease();
@@ -485,7 +482,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			case "none":
 				break;
 			default:
-				getURL(this._onDoubleClick, this._onDoubleClickTarget);
+				//getURL('http://localhost:3000/debugg', '_self', 'POST');
 		}
 	}
 	/**
@@ -1488,6 +1485,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _onStageFullscreen()
 	{
+		this._debug('onStageFullscreen');
 		this._isFullscreen = true;
 		this._stageNormalParams = new Object();
 		
@@ -1528,6 +1526,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _onStageNormal()
 	{
+		this._debug('onstagenormal');
 		this._isFullscreen = false;
 		
 		//this._player._x = this._stageNormalParams.player_x;
@@ -1568,7 +1567,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function resizeVideo(pWidth:Number, pHeight:Number)
 	{
-		this._debug("video resize");
+		//this._debug("video resize");
 		// On redimensinone la vidéo à la taille du flash en gardant les proportions
 		var originWidth:Number = (pWidth !== undefined)?pWidth:this.video.video.width;
 		var originHeight:Number = (pHeight !== undefined)?pHeight:this.video.video.height;
@@ -1662,6 +1661,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function fullscreenRelease()
 	{
+		this._debug(this._isFullscreen);
 		Stage["displayState"] = (!this._isFullscreen)?"fullscreen":"normal";
 	}
 	/**
