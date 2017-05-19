@@ -23,10 +23,12 @@ The Initial Developer of the Original Code is neolao (neolao@gmail.com).
  * @license		http://creativecommons.org/licenses/by-sa/3.0/deed.fr
  */ 
 
+
 class TemplateMaxi extends TemplateMaxiBase
 {
 	
-	
+	private var _previousStageWidth:Number = 0;
+	private var _previousStageHeight:Number = 0;
 	/*============================= CONSTRUCTEUR =============================*/
 	/*========================================================================*/
 	/**
@@ -76,8 +78,6 @@ class TemplateMaxi extends TemplateMaxiBase
 		var fullscreenListener:Object = new Object();
 		fullscreenListener.onFullScreen = this.delegate(this, function(pFull:Boolean)
 		{	
-			//this._debug('on full screen: ' + Stage["displayState"])
-			//this._isFullscreen = !this._isFullscreen;
 			if (Stage["displayState"] === 'fullScreen') {
 				this._onStageFullscreen();
 			} else {
@@ -98,8 +98,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		// Auto resize
 		var stageListener:Object = new Object();
 		stageListener.onResize = this.delegate(this, function () {
-			//this._debug('onResize: ' + this._isFullscreen)
-			if (!this._isFullscreen) {
+			if (!this._isFullscreen && this._isPlayerSizeChanged()) {
 				this._onStageNormal();
 			}
 		});
@@ -443,7 +442,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _videoOnClick()
 	{
-		this._debug("clickvideo");
 		// Reset onclick interval
 		clearInterval(this._onClickInterval);
 		this._onClickInterval = -1;
@@ -469,7 +467,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	private function _videoOnDoubleClick()
 	{
 		// Actions
-		this._debug(this._onDoubleClick);
 		switch (this._onDoubleClick) {
 			case "fullscreen":
 				this.fullscreenRelease();
@@ -484,7 +481,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			case "none":
 				break;
 			default:
-				//getURL('http://localhost:3000/debugg', '_self', 'POST');
+				getURL(this._onDoubleClick, this._onDoubleClickTarget);
 		}
 	}
 	/**
@@ -1487,7 +1484,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _onStageFullscreen()
 	{
-		this._debug('onStageFullscreen');
 		this._isFullscreen = true;
 		this._stageNormalParams = new Object();
 		
@@ -1528,7 +1524,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _onStageNormal()
 	{
-		this._debug('onStageNormal');
+		
 		this._isFullscreen = false;
 		
 		//this._player._x = this._stageNormalParams.player_x;
@@ -1538,6 +1534,9 @@ class TemplateMaxi extends TemplateMaxiBase
 		//_root.height = this._stageNormalParams.root_height;
 		//this._swfWidth = this._stageNormalParams.swfWidth;
 		//this._swfHeight = this._stageNormalParams.swfHeight;
+		this._previousStageWidth = Stage.width;
+		this._previousStageHeight = Stage.height;
+
 		this._videoMargin = (_root.margin === undefined)?5:parseInt(_root.margin, 10);
 		this._player._x = this._videoMargin;
 		this._player._y = Stage.height - PLAYER_HEIGHT - this._videoMargin;
@@ -1556,6 +1555,12 @@ class TemplateMaxi extends TemplateMaxiBase
 		
 		resizeVideo();
 	}
+	
+	private function _isPlayerSizeChanged():Boolean
+	{
+		return this._previousStageWidth !== Stage.width &&
+			   this._previousStageHeight !== Stage.height
+	}
 	/*===================== FIN = METHODES PRIVEES = FIN =====================*/
 	/*========================================================================*/
 	
@@ -1569,7 +1574,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function resizeVideo(pWidth:Number, pHeight:Number)
 	{
-		//this._debug("video resize");
 		// On redimensinone la vidéo à la taille du flash en gardant les proportions
 		var originWidth:Number = (pWidth !== undefined)?pWidth:this.video.video.width;
 		var originHeight:Number = (pHeight !== undefined)?pHeight:this.video.video.height;
@@ -1663,7 +1667,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	public function fullscreenRelease()
 	{
-		//this._debug('fullscreenRelease: ' + this._isFullscreen);
 		Stage["displayState"] = (!this._isFullscreen)?"fullscreen":"normal";
 	}
 	/**
@@ -1753,7 +1756,6 @@ class TemplateMaxi extends TemplateMaxiBase
 	/*========================================================================*/
 	public function set jsPlay(n:String)
 	{
-		this._debug('play')
 		if (!this.controller.isPlaying) {
 			this.playRelease();
 		}
