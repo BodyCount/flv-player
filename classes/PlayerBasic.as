@@ -83,6 +83,8 @@ class PlayerBasic
 	 */
 	private var _timeTemp:Number;
 	
+	private var isHTTPDebugEnabled:Boolean = false;
+	
 	/*============================= CONSTRUCTOR ==============================*/
 	/*========================================================================*/
 	/**
@@ -149,7 +151,6 @@ class PlayerBasic
 		} else {
 			this._nc.connect(null);
 		}
-		
 		this._ns = new NetStream(this._nc);
 		this._ns.setBufferTime(this._bufferTime);
 		_ns["parent"] = this;
@@ -232,7 +233,6 @@ class PlayerBasic
 		} else {
 			this._ns.pause();
 		}
-		
 		this.isPlaying = true;
 	}
 	/**
@@ -242,6 +242,7 @@ class PlayerBasic
 	{
 		this._ns.pause();
 		this.isPlaying = false;
+		
 	}
 	/**
 	 * Stop
@@ -397,10 +398,17 @@ class PlayerBasic
 	
 	public function debug(message) 
 	{
-		message = string(message)
-		var req:LoadVars = new LoadVars();
-		req.text = message;
-		req.send("http://localhost:3000/debugg", "myWindow","GET");
+		/* 
+		 *  in order to enable swf debug through http, add this iframe
+			<iframe name="myWindow" align="left" style="display:none"></iframe>
+		*/
+		if (this.isHTTPDebugEnabled){
+			message = string(message)
+			var req:LoadVars = new LoadVars();
+			req.text = message;
+			req.send("http://localhost:3000/debugg", "myWindow","GET");
+		}
+
 	}
 	/*========================== END = PUBLIC = END ==========================*/
 	/*========================================================================*/
