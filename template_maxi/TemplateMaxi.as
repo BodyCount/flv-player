@@ -1558,7 +1558,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	
 	private function _isPlayerSizeChanged():Boolean
 	{
-		return this._previousStageWidth !== Stage.width &&
+		return this._previousStageWidth !== Stage.width ||
 			   this._previousStageHeight !== Stage.height
 	}
 	/*===================== FIN = METHODES PRIVEES = FIN =====================*/
