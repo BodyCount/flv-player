@@ -83,7 +83,7 @@ class PlayerBasic
 	 */
 	private var _timeTemp:Number;
 	
-	private var isHTTPDebugEnabled:Boolean = true;
+	private var isHTTPDebugEnabled:Boolean = false;
 	
 	/*============================= CONSTRUCTOR ==============================*/
 	/*========================================================================*/
