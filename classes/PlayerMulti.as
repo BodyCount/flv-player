@@ -111,6 +111,7 @@ class PlayerMulti extends PlayerDefault
 	 * Initialisation de la video
 	 */
 	private function _initVideo(){
+		
 		this._nc = new NetConnection();
 		this._nc.connect(null);
 		

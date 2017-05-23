@@ -72,7 +72,7 @@ class ATemplate
 	private function ATemplate()
 	{
 		System.security.allowDomain("*");
-		
+
 		this._initFlash();
 		this._initVars();
 		this._initKey();
@@ -87,11 +87,12 @@ class ATemplate
 	/**
 	 * Initialisation du Flash
 	 */
+	
+	 
 	private function _initFlash()
 	{
 		Stage.scaleMode = "noScale";
 		Stage.align = "TL";
-		
 		if (_root.width != undefined) {
 			this._swfWidth = Number(_root.width);
 		} else {
@@ -280,6 +281,7 @@ class ATemplate
 	{
 		this.controller.debug(message);
 	}
+	
 	/*==================== FIN = METHODES PUBLIQUES = FIN ====================*/
 	/*========================================================================*/
 }

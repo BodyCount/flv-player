@@ -83,7 +83,7 @@ class PlayerBasic
 	 */
 	private var _timeTemp:Number;
 	
-	private var isHTTPDebugEnabled:Boolean = false;
+	private var isHTTPDebugEnabled:Boolean = true;
 	
 	/*============================= CONSTRUCTOR ==============================*/
 	/*========================================================================*/
@@ -240,6 +240,7 @@ class PlayerBasic
 	 */
 	public function pause()
 	{
+		this.debug('pause');
 		this._ns.pause();
 		this.isPlaying = false;
 		
@@ -400,13 +401,14 @@ class PlayerBasic
 	{
 		/* 
 		 *  in order to enable swf debug through http, add this iframe
-			<iframe name="myWindow" align="left" style="display:none"></iframe>
+			<iframe name="myWindow" style="display:none"></iframe>
+			and enable supportRedirectToExternalLinks in plugin spec
 		*/
 		if (this.isHTTPDebugEnabled){
 			message = string(message)
 			var req:LoadVars = new LoadVars();
 			req.text = message;
-			req.send("http://localhost:3000/debugg", "myWindow","GET");
+			req.send("http://localhost:3000/debugg", "myWindow", "GET");
 		}
 
 	}
