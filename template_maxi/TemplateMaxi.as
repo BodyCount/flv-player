@@ -711,9 +711,9 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._player.removeMovieClip();
 		}
 		
-		if (this._bigIcons) {
-			this._changeIconsSize();
-		}
+		//if (this._bigIcons) {
+			this._changeIconsSize(this._logicalDpi);
+		//}
 		
 		super._initPlayer();
 		
@@ -766,12 +766,37 @@ class TemplateMaxi extends TemplateMaxiBase
 	}
 	
 
-	private function _changeIconsSize()
+	private function _changeIconsSize(logicalDpi: Number)
 	{
-		BUTTON_WIDTH = 52;
-		VOLUME_WIDTH = 60;
-		VOLUME_HEIGHT = 12;
-		PLAYER_HEIGHT = 30;
+		switch(logicalDpi) {
+			case 96:
+				break;
+			case 120:
+				BUTTON_WIDTH = BUTTON_WIDTH * 2;
+				VOLUME_WIDTH = VOLUME_WIDTH * 2;
+				VOLUME_HEIGHT = VOLUME_HEIGHT * 2;
+				PLAYER_HEIGHT = PLAYER_HEIGHT * 2;
+				break;
+			case 144:
+				BUTTON_WIDTH = 250;
+				VOLUME_WIDTH = 250;
+				VOLUME_HEIGHT = 250;
+				PLAYER_HEIGHT = 250;
+				break;
+			case 168:
+				BUTTON_WIDTH = BUTTON_WIDTH * 4;
+				VOLUME_WIDTH = VOLUME_WIDTH * 4;
+				VOLUME_HEIGHT = VOLUME_HEIGHT * 4;
+				PLAYER_HEIGHT = PLAYER_HEIGHT * 4;
+				break;
+			case 192:
+				BUTTON_WIDTH = BUTTON_WIDTH * 5;
+				VOLUME_WIDTH = VOLUME_WIDTH * 5;
+				VOLUME_HEIGHT = VOLUME_HEIGHT * 5;
+				PLAYER_HEIGHT = PLAYER_HEIGHT * 5;
+				break;
+		}
+
 	}
 	
 	/** 

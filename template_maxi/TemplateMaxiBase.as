@@ -355,6 +355,8 @@ class TemplateMaxiBase extends ATemplate
 	
 	private var _bigIcons:Boolean = false;
 	
+	private var _logicalDpi:Number = 96;
+	
 	private var _enableSeparators:Boolean = true;
 	
 	private var _enableDebug:Boolean = false;
@@ -456,6 +458,7 @@ class TemplateMaxiBase extends ATemplate
 		this._setVar("_iconPlayBackgroundColor", [_root.iconplaybgcolor, pConfig.iconplaybgcolor], 	"Color");
 		this._setVar("_iconPlayBackgroundAlpha", [_root.iconplaybgalpha, pConfig.iconplaybgalpha], 	"Number");
 		this._setVar("_bigIcons", [_root.bigicons, pConfig.bigicons], 	"Boolean");
+		this._setVar("_logicalDpi", [_root.logicaldpi, pConfig.logicaldpi], 	"Number");
 		this._setVar("_enableSeparators", [_root.enableseparators, pConfig.enableseparators], 	"Boolean");
 		this._setVar("_enableDebug", [_root.enabledebug, pConfig.enabledebug], 	"Boolean");
 		// Initialize top containers

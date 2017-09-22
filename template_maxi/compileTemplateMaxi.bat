@@ -1,1 +1,1 @@
-D:\mtasc\mtasc.exe -version 8 -keep -v -main -cp D:\flv-player\classes -swf "C:\Users\ephomin\AppData\Roaming\Interactive Data\eSignal\WebPlugins\esignalmedia\js\plugins\player_flv_maxi.swf" D:\flv-player\template_maxi\TemplateMaxi.as
+D:\mtasc\mtasc.exe -version 8 -keep -v -main -cp D:\flv-player\classes -swf "%APPDATA%\Interactive Data\eSignal\WebPlugins\esignalmedia\js\plugins\player_flv_maxi.swf" D:\flv-player\template_maxi\TemplateMaxi.as
