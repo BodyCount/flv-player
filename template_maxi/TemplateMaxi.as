@@ -711,9 +711,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._player.removeMovieClip();
 		}
 		
-		//if (this._bigIcons) {
-			this._changeIconsSize(this._logicalDpi);
-		//}
+		this._changeIconsSize(this._logicalDpi);
 		
 		super._initPlayer();
 		
@@ -768,35 +766,19 @@ class TemplateMaxi extends TemplateMaxiBase
 
 	private function _changeIconsSize(logicalDpi: Number)
 	{
-		switch(logicalDpi) {
-			case 96:
-				break;
-			case 120:
-				BUTTON_WIDTH = BUTTON_WIDTH * 2;
-				VOLUME_WIDTH = VOLUME_WIDTH * 2;
-				VOLUME_HEIGHT = VOLUME_HEIGHT * 2;
-				PLAYER_HEIGHT = PLAYER_HEIGHT * 2;
-				break;
-			case 144:
-				BUTTON_WIDTH = 250;
-				VOLUME_WIDTH = 250;
-				VOLUME_HEIGHT = 250;
-				PLAYER_HEIGHT = 250;
-				break;
-			case 168:
-				BUTTON_WIDTH = BUTTON_WIDTH * 4;
-				VOLUME_WIDTH = VOLUME_WIDTH * 4;
-				VOLUME_HEIGHT = VOLUME_HEIGHT * 4;
-				PLAYER_HEIGHT = PLAYER_HEIGHT * 4;
-				break;
-			case 192:
-				BUTTON_WIDTH = BUTTON_WIDTH * 5;
-				VOLUME_WIDTH = VOLUME_WIDTH * 5;
-				VOLUME_HEIGHT = VOLUME_HEIGHT * 5;
-				PLAYER_HEIGHT = PLAYER_HEIGHT * 5;
-				break;
-		}
-
+		var defaultDpi:Number = 96;
+		var defaultMultiplier:Number = 1.5;
+		
+		var dpiUnit:Number = 24;
+		var multiplierUnit:Number = 0.3;
+		
+		//example: 1.5 + ((120 - 96) / 24) * 0.3 = 1.5 + 1 * 0.3 = 1.8 scale to 120 dpi
+		this._dpiMultiplier = defaultMultiplier + ((logicalDpi - defaultDpi) / dpiUnit)  * multiplierUnit;
+		
+		BUTTON_WIDTH = BUTTON_WIDTH * this._dpiMultiplier;
+		VOLUME_WIDTH = VOLUME_WIDTH * this._dpiMultiplier;
+		VOLUME_HEIGHT = VOLUME_HEIGHT * this._dpiMultiplier;
+		PLAYER_HEIGHT = PLAYER_HEIGHT * this._dpiMultiplier;
 	}
 	
 	/** 
@@ -837,7 +819,6 @@ class TemplateMaxi extends TemplateMaxiBase
 		
 
 		var vTotal:Number = 0;
-		if (!this._bigIcons) {
 			for (var i:Number=0; i<=pList.length; i++) {
 				vTotal += pList[i];
 				this._playerSeparators.beginFill(0xcccccc, 50);
@@ -851,23 +832,6 @@ class TemplateMaxi extends TemplateMaxiBase
 				this._playerSeparators.lineTo(vTotal - 1, PLAYER_HEIGHT - 2);
 				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 2);
 				this._playerSeparators.endFill();
-			}
-		} else {
-			for (var i:Number=0; i<=pList.length; i++) {
-				vTotal += pList[i];
-				
-				this._playerSeparators.beginFill(0xcccccc, 50);
-				this._playerSeparators.moveTo(vTotal, 2);
-				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 4);
-				this._playerSeparators.lineTo(vTotal + 1, PLAYER_HEIGHT - 4);
-				this._playerSeparators.lineTo(vTotal + 1, 2);
-				this._playerSeparators.endFill();
-				this._playerSeparators.beginFill(0x666666, 50);
-				this._playerSeparators.lineTo(vTotal - 1, 2);
-				this._playerSeparators.lineTo(vTotal - 1, PLAYER_HEIGHT - 4);
-				this._playerSeparators.lineTo(vTotal, PLAYER_HEIGHT - 4);
-				this._playerSeparators.endFill();		
-			}
 		}
 	}
 	/**
@@ -927,22 +891,12 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPlay.area_mc.onRelease = this.delegate(this, this.playRelease);
 		
 		// icone
-		if (!this._bigIcons) {
-			this._playerPlay.icon_mc.beginFill(_buttonColor);
-			this._playerPlay.icon_mc.lineTo(0, 8);
-			this._playerPlay.icon_mc.lineTo(6, 4);
-			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
-			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
-		} else {
-			this._playerPlay.icon_mc.beginFill(_buttonColor);
-			this._playerPlay.icon_mc.lineTo(0, 16);
-			this._playerPlay.icon_mc.lineTo(12, 8);
-			this._playerPlay.icon_mc.endFill();
-			this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/1.7;
-			this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
-		
-		}
+		this._playerPlay.icon_mc.beginFill(_buttonColor);
+		this._playerPlay.icon_mc.lineTo(0, 8 * this._dpiMultiplier);
+		this._playerPlay.icon_mc.lineTo(6 * this._dpiMultiplier, 4 * this._dpiMultiplier);
+		this._playerPlay.icon_mc.endFill();
+		this._playerPlay.icon_mc._y = PLAYER_HEIGHT/2 - _playerPlay.icon_mc._height/2;
+		this._playerPlay.icon_mc._x = BUTTON_WIDTH/2 - _playerPlay.icon_mc._width/2;
 
 	}
 	/**
@@ -956,36 +910,19 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._playerPause.area_mc.onRelease = this.delegate(this, this.pauseRelease); 
 		
 		// icone
-		if (!this._bigIcons) {
-			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.lineTo(0, 8); 
-			this._playerPause.icon_mc.lineTo(3, 8); 
-			this._playerPause.icon_mc.lineTo(3, 0); 
-			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.moveTo(5, 0); 
-			this._playerPause.icon_mc.lineTo(5, 8); 
-			this._playerPause.icon_mc.lineTo(8, 8); 
-			this._playerPause.icon_mc.lineTo(8, 0); 
-			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
-			this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;
-		} else {
-			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.lineTo(0, 16); 
-			this._playerPause.icon_mc.lineTo(6, 16); 
-			this._playerPause.icon_mc.lineTo(6, 0); 
-			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc.beginFill(this._buttonColor); 
-			this._playerPause.icon_mc.moveTo(10, 0); 
-			this._playerPause.icon_mc.lineTo(10, 16); 
-			this._playerPause.icon_mc.lineTo(16, 16); 
-			this._playerPause.icon_mc.lineTo(16, 0); 
-			this._playerPause.icon_mc.endFill(); 
-			this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/1.7;
-			this._playerPause.icon_mc._x = BUTTON_WIDTH/2 - _playerPause.icon_mc._width/2;
-		
-		}
+		this._playerPause.icon_mc.beginFill(this._buttonColor); 
+		this._playerPause.icon_mc.lineTo(0, 8 * this._dpiMultiplier); 
+		this._playerPause.icon_mc.lineTo(3 * this._dpiMultiplier, 8 * this._dpiMultiplier); 
+		this._playerPause.icon_mc.lineTo(3 * this._dpiMultiplier, 0); 
+		this._playerPause.icon_mc.endFill(); 
+		this._playerPause.icon_mc.beginFill(this._buttonColor); 
+		this._playerPause.icon_mc.moveTo(5 * this._dpiMultiplier, 0); 
+		this._playerPause.icon_mc.lineTo(5 * this._dpiMultiplier, 8 * this._dpiMultiplier); 
+		this._playerPause.icon_mc.lineTo(8 * this._dpiMultiplier, 8 * this._dpiMultiplier); 
+		this._playerPause.icon_mc.lineTo(8 * this._dpiMultiplier, 0); 
+		this._playerPause.icon_mc.endFill(); 
+		this._playerPause.icon_mc._y = PLAYER_HEIGHT/2 - _playerPause.icon_mc._height/2;
+		this._playerPause.icon_mc._x = BUTTON_WIDTH / 2 - _playerPause.icon_mc._width / 2;
 	}
 	/**
 	 * Initialisation du bouton stop
@@ -1001,23 +938,13 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerStop.area_mc.onRelease = this.delegate(this, this.stopRelease); 
 			
 			// icone
-			if (!this._bigIcons) {
-				this._playerStop.icon_mc.beginFill(this._buttonColor); 
-				this._playerStop.icon_mc.lineTo(0, 8);
-				this._playerStop.icon_mc.lineTo(8, 8);
-				this._playerStop.icon_mc.lineTo(8, 0);
-				this._playerStop.icon_mc.endFill(); 
-				this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
-				this._playerStop.icon_mc._x = BUTTON_WIDTH / 2 - _playerStop.icon_mc._width / 2;
-			} else {
-				this._playerStop.icon_mc.beginFill(this._buttonColor); 
-				this._playerStop.icon_mc.lineTo(0, 8);
-				this._playerStop.icon_mc.lineTo(8, 8);
-				this._playerStop.icon_mc.lineTo(8, 0);
-				this._playerStop.icon_mc.endFill(); 
-				this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
-				this._playerStop.icon_mc._x = BUTTON_WIDTH / 2 - _playerStop.icon_mc._width / 2;
-			}
+			this._playerStop.icon_mc.beginFill(this._buttonColor); 
+			this._playerStop.icon_mc.lineTo(0, 8);
+			this._playerStop.icon_mc.lineTo(8, 8);
+			this._playerStop.icon_mc.lineTo(8, 0);
+			this._playerStop.icon_mc.endFill(); 
+			this._playerStop.icon_mc._y = PLAYER_HEIGHT/2 - _playerStop.icon_mc._height/2;
+			this._playerStop.icon_mc._x = BUTTON_WIDTH / 2 - _playerStop.icon_mc._width / 2;
 		}
 	}
 	/**
@@ -1039,26 +966,15 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerVolume.area_mc.onReleaseOutside = this.delegate(this, this._volumeRelease);
 			
 			// icone fond
-			if (!this._bigIcons) {
-				var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
-				vIconBackground.beginFill(this._buttonColor, 25);
-				vIconBackground.moveTo(0, VOLUME_HEIGHT);
-				vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
-				vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
-				vIconBackground.endFill();
-				vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height/2;
-				vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
-			} else {
-				var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
-				vIconBackground.beginFill(this._buttonColor, 25);
-				vIconBackground.moveTo(0, VOLUME_HEIGHT);
-				vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
-				vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
-				vIconBackground.endFill();
-				vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height/1.7;
-				vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
-			
-			}
+			var vIconBackground:MovieClip = this._playerVolume.icon_mc.createEmptyMovieClip("background_mc", 1);
+			vIconBackground.beginFill(this._buttonColor, 25);
+			vIconBackground.moveTo(0, VOLUME_HEIGHT);
+			vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
+			vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
+			vIconBackground.endFill();
+			vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height / 2;
+			vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
+
 			
 			// icone
 			this._updateVolume();
@@ -1083,7 +999,6 @@ class TemplateMaxi extends TemplateMaxiBase
 		
 		var vWidth:Number = (VOLUME_WIDTH - 8) * this._volume / this._volumeMax;
 		var vRatio:Number = this._volume / this._volumeMax;
-		if (!this._bigIcons) {
 			vIcon.beginFill(this._buttonColor);
 			vIcon.moveTo(0, VOLUME_HEIGHT);
 			vIcon.lineTo(vWidth, VOLUME_HEIGHT);
@@ -1091,15 +1006,6 @@ class TemplateMaxi extends TemplateMaxiBase
 			vIcon.endFill();
 			vIcon._y = vIcon._parent.background_mc._y;
 			vIcon._x = vIcon._parent.background_mc._x;
-		} else {
-			vIcon.beginFill(this._buttonColor);
-			vIcon.moveTo(0, VOLUME_HEIGHT);
-			vIcon.lineTo(vWidth, VOLUME_HEIGHT);
-			vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
-			vIcon.endFill();
-			vIcon._y = vIcon._parent.background_mc._y;
-			vIcon._x = vIcon._parent.background_mc._x;
-		}
 	}
 	/**
 	 * Le enterFrame pendant l'appui du bouton Volume
@@ -1197,39 +1103,21 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._playerFullscreen.area_mc.onRelease = this.delegate(this, this.fullscreenRelease); 
 			
 			// icone
-			if (!this._bigIcons) {
-				this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.lineTo(0, 12);
-				this._playerFullscreen.icon_mc.lineTo(12, 12);
-				this._playerFullscreen.icon_mc.lineTo(12, 0);
-				this._playerFullscreen.icon_mc.lineTo(0, 0);
-				
-				this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.moveTo(6, 4);
-				this._playerFullscreen.icon_mc.lineTo(9, 4);
-				this._playerFullscreen.icon_mc.lineTo(9, 7);
-				this._playerFullscreen.icon_mc.moveTo(9, 4);
-				this._playerFullscreen.icon_mc.lineTo(4, 9);
-				
-				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
-				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
-			} else {
-				this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.lineTo(0, 24);
-				this._playerFullscreen.icon_mc.lineTo(24, 24);
-				this._playerFullscreen.icon_mc.lineTo(24, 0);
-				this._playerFullscreen.icon_mc.lineTo(0, 0);
-				
-				this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
-				this._playerFullscreen.icon_mc.moveTo(12, 8);
-				this._playerFullscreen.icon_mc.lineTo(18, 8);
-				this._playerFullscreen.icon_mc.lineTo(18, 14);
-				this._playerFullscreen.icon_mc.moveTo(18, 8);
-				this._playerFullscreen.icon_mc.lineTo(8, 18);
-				
-				this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/1.8;
-				this._playerFullscreen.icon_mc._x = BUTTON_WIDTH/2 - this._playerFullscreen.icon_mc._width/2 + 1;
-			}
+			this._playerFullscreen.icon_mc.lineStyle(1, this._buttonColor, 100);
+			this._playerFullscreen.icon_mc.lineTo(0, 12 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.lineTo(12 * this._dpiMultiplier, 12 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.lineTo(12 * this._dpiMultiplier, 0);
+			this._playerFullscreen.icon_mc.lineTo(0, 0);
+			
+			this._playerFullscreen.icon_mc.lineStyle(2, this._buttonColor, 100);
+			this._playerFullscreen.icon_mc.moveTo(6 * this._dpiMultiplier, 4 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.lineTo(9 * this._dpiMultiplier, 4 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.lineTo(9 * this._dpiMultiplier, 7 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.moveTo(9 * this._dpiMultiplier, 4 * this._dpiMultiplier);
+			this._playerFullscreen.icon_mc.lineTo(4 * this._dpiMultiplier, 9 * this._dpiMultiplier);
+			
+			this._playerFullscreen.icon_mc._y = PLAYER_HEIGHT/2 - this._playerFullscreen.icon_mc._height/2 + 1;
+			this._playerFullscreen.icon_mc._x = BUTTON_WIDTH / 2 - this._playerFullscreen.icon_mc._width / 2 + 1;
 		}
 	}
 	/**
