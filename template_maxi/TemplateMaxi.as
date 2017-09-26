@@ -972,7 +972,7 @@ class TemplateMaxi extends TemplateMaxiBase
 			vIconBackground.lineTo(VOLUME_WIDTH - 8, VOLUME_HEIGHT);
 			vIconBackground.lineTo(VOLUME_WIDTH - 8, 0);
 			vIconBackground.endFill();
-			vIconBackground._y = PLAYER_HEIGHT/2 - vIconBackground._height / 2;
+			vIconBackground._y = PLAYER_HEIGHT/ 2 - vIconBackground._height/ 2;
 			vIconBackground._x = VOLUME_WIDTH / 2 - vIconBackground._width / 2;
 
 			
@@ -985,6 +985,7 @@ class TemplateMaxi extends TemplateMaxiBase
 	 */
 	private function _updateVolume()
 	{
+		
 		var vIcon:MovieClip;
 		if (this._playerVolume.icon_mc.current_mc == undefined) {
 			vIcon = this._playerVolume.icon_mc.createEmptyMovieClip("current_mc", 2);
@@ -997,15 +998,16 @@ class TemplateMaxi extends TemplateMaxiBase
 			this._volume = this._volumeMax;
 		}
 		
-		var vWidth:Number = (VOLUME_WIDTH - 8) * this._volume / this._volumeMax;
 		var vRatio:Number = this._volume / this._volumeMax;
-			vIcon.beginFill(this._buttonColor);
-			vIcon.moveTo(0, VOLUME_HEIGHT);
-			vIcon.lineTo(vWidth, VOLUME_HEIGHT);
-			vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
-			vIcon.endFill();
-			vIcon._y = vIcon._parent.background_mc._y;
-			vIcon._x = vIcon._parent.background_mc._x;
+		var vWidth:Number = (VOLUME_WIDTH - 8) * vRatio;
+		
+		vIcon.beginFill(this._buttonColor);
+		vIcon.moveTo(0, VOLUME_HEIGHT);
+		vIcon.lineTo(vWidth, VOLUME_HEIGHT);
+		vIcon.lineTo(vWidth, VOLUME_HEIGHT - VOLUME_HEIGHT * vRatio);
+		vIcon.endFill();
+		vIcon._y = vIcon._parent.background_mc._y;
+		vIcon._x = vIcon._parent.background_mc._x;
 	}
 	/**
 	 * Le enterFrame pendant l'appui du bouton Volume
