@@ -1534,7 +1534,7 @@ class TemplateMaxi extends TemplateMaxiBase
 		this._enableButton(this._playerStop, true);
 		
 		if (this._showPlayer === "autohide") {
-			this._player._visible = false;
+			//this._player._visible = false;
 			Mouse.removeListener(this._mouse);
 			Mouse.addListener(this._mouse);
 		}
